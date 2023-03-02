@@ -11,12 +11,13 @@ config_version=4
 [application]
 
 config/name="hard_decision"
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://UI/Lobby.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://Scenes/Global.tscn"
+Server="*res://Server.gd"
 
 [display]
 
