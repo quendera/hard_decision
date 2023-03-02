@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -9,6 +9,10 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 36
 font_data = ExtResource( 4 )
 
 [node name="Game" type="Node2D"]
@@ -77,6 +81,7 @@ text = "Enter your justification in the box below:"
 margin_left = -453.0
 margin_top = -378.0
 margin_right = 447.0
-margin_bottom = -241.0
+margin_bottom = -174.0
+custom_fonts/font = SubResource( 2 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

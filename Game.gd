@@ -58,13 +58,6 @@ func start_trial():
 	$Player.can_move = true
 	$Timer.id = "start_trial"
 	start_timer(timeformovement) 
-	for idx in range(10):
-		randomize()
-		var x = randi() % 1000
-		botscoordinates = Vector2(x,x)
-		var spawn_time = randf() * timeformovement
-		spawn_others(spawn_time, botscoordinates)
-	
 
 func spawn_others(spawn_time, botscoordinates):
 	var timetospawn = Timer.new()
