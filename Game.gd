@@ -2,26 +2,39 @@ extends Node2D
 
 
 # Declare member variables here. Examples:
+
 var time
 var centre
+
 var timeformovement
 var timeforjustification
+
 var vector_array
 var coordinates
+var botscoordinates
 var justificationtext = ""
-
+var q1 = ""
+var q2 = ""
+var querydict = []
 var scene = preload("res://Scenes/Player.tscn")
+var others = preload("res://Scenes/Others.tscn")
+var trialnumber
 
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
 	print(Global.PlayerName)
 	centre = Global.get_viewport_rect().size/2
-	read_json_file("res://trialstructure.json")
-	
+	querydict = read_json_file("res://csvjson.json")
+	trialnumber = 0
+	set_trialdurations()
 	align_stuff()
 	start_trial()
 
+func set_trialdurations():
+	timeforjustification = 5.0
+	timeformovement = 5.0
+	
 func read_json_file(file_path):
 	var file = File.new()
 	file.open(file_path, File.READ)
@@ -34,17 +47,38 @@ func align_stuff():
 	$LineV.global_position.x = centre.x
 
 func start_trial():
-	timeformovement = 5
-	$Q1.set_bbcode("[center]Trump or Obama[/center]")
-	$Q2.set_bbcode("[center]Orange or Blue[/center]")
+	reset_position()
+	q1 = "[center]"+querydict[trialnumber].question1+"[/center]"
+	q2 = "[center]"+querydict[trialnumber].question2+"[/center]"
+	$Q1.set_bbcode(q1)
+	$Q2.set_bbcode(q2)
 
 	$Justification.visible = false
 	$Justification_text.visible = false
 	$Player.can_move = true
 	$Timer.id = "start_trial"
-	start_timer(timeformovement)
-	reset_position()
+	start_timer(timeformovement) 
+	for idx in range(10):
+		randomize()
+		var x = randi() % 1000
+		botscoordinates = Vector2(x,x)
+		var spawn_time = randf() * timeformovement
+		spawn_others(spawn_time, botscoordinates)
+	
 
+func spawn_others(spawn_time, botscoordinates):
+	var timetospawn = Timer.new()
+	add_child(timetospawn)
+	timetospawn.wait_time = spawn_time
+	timetospawn.one_shot = true
+	timetospawn.start()
+	timetospawn.connect("timeout", self, "_on_timetospawn_timeout")
+	
+func _on_timetospawn_timeout():
+	var spawner = others.instance()
+	add_child(spawner)
+	spawner.set_positions(botscoordinates)
+	
 func start_timer(trial_duration):
 	$Timer.start(trial_duration)
 	$Timer.total_time = trial_duration
@@ -52,12 +86,13 @@ func start_timer(trial_duration):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
+	
 func _on_Timer_timeout():
 	print("times up")
 	$Player.can_move = false
 	$Timer.stop()
 	if $Timer.id == "justification":
+		trialnumber = trialnumber + 1
 		start_trial()
 		justificationtext = $Justification.text
 		Global.sendtoserver(justificationtext, Global.PlayerName)
@@ -66,7 +101,6 @@ func _on_Timer_timeout():
 		justification()
 
 func justification():
-	timeforjustification = 5
 	$Justification.visible = true
 	$Justification_text.visible = true
 	$Justification.text = ""
