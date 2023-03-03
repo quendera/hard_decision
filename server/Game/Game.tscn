@@ -42,10 +42,12 @@ custom_fonts/normal_font = ExtResource( 5 )
 bbcode_enabled = true
 
 [node name="Q2" type="RichTextLabel" parent="."]
+
 margin_left = 52.0
 margin_top = 554.0
 margin_right = 784.0
 margin_bottom = 996.0
+
 custom_fonts/normal_font = ExtResource( 5 )
 bbcode_enabled = true
 
@@ -95,6 +97,7 @@ text = "Disagree"
 script = ExtResource( 4 )
 
 [node name="BotJustification" type="RichTextLabel" parent="."]
+visible = false
 margin_left = 50.0
 margin_top = 383.0
 margin_right = 750.0

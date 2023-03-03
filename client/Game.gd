@@ -13,6 +13,7 @@ var timeforbotjustification
 # Coordinates
 var coordinates
 var botscoordinates
+var botText
 
 # Text Variables
 var justificationtext = ""
@@ -20,10 +21,13 @@ var q1 = []
 var q2 = []
 var querydict = []
 
+var bot_colors = [[230, 25, 75,255], [60, 180, 75,255], [255, 225, 25,255], [0, 130, 200,255]]
+
 # Preload scene for instancing
 var scene = preload("res://Scenes/Player.tscn")
 var others = preload("res://Scenes/Others.tscn")
 var spawner
+var rand_color
 
 # Trial Information
 var trialnumber
@@ -48,12 +52,6 @@ func set_trialdurations():
 	timeformovement = 10.0
 	timeforbotjustification = 10.0
 	
-func read_json_file(file_path):
-	var file = File.new()
-	file.open(file_path, File.READ)
-	var content_as_text = file.get_as_text()
-	var content_as_dictionary = parse_json(content_as_text)
-	return content_as_dictionary
 	
 #func align_stuff():
 #	$LineH.global_position.y = centre.y
@@ -75,6 +73,7 @@ func start_trial():
 	$BotJustifications.visible = false
 	$Player.can_move = true
 	$Timer.id = "start_trial"
+	botText = querydict[trialnumber].justification
 	start_timer(timeformovement) 
 
 func spawn_others(spawn_time, botscoordinates):
@@ -133,8 +132,12 @@ func justification():
 func botjustification():
 	$Justification.visible = false
 	$Justification_text.visible = false
+	rand_color = bot_colors[Server.bot_id]
 	if Server.show_botjustification:
 		$BotJustifications.visible = true
+		$BotJustifications.text = ""
+		$BotJustifications.push_color(Color(float(rand_color[0])/255,float(rand_color[1])/255,float(rand_color[2])/255,1))
+		$BotJustifications.add_text(botText)
 
 	$Timer.id = "botjustification"
 	send_player_justification()

@@ -46,6 +46,7 @@ other players..."
 align = 1
 
 [node name="TextEdit" type="TextEdit" parent="."]
+visible = false
 margin_left = 42.0
 margin_top = 776.0
 margin_right = 242.0
