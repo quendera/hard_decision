@@ -41,6 +41,8 @@ margin_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = SubResource( 2 )
-text = "Waiting for other players..."
+text = "Waiting for 
+other players..."
+align = 1
 
 [connection signal="pressed" from="StartGame" to="." method="_on_StartGame_pressed"]

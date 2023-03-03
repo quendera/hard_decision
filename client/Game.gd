@@ -8,6 +8,7 @@ var centre
 var time
 var timeformovement
 var timeforjustification
+var timeforbotjustification
 
 # Coordinates
 var coordinates
@@ -17,10 +18,6 @@ var botscoordinates
 var justificationtext = ""
 var q1 = []
 var q2 = []
-var q1_top = ""
-var q2_top = ""
-var q1_bot = ""
-var q2_bot = ""
 var querydict = []
 
 # Preload scene for instancing
@@ -36,7 +33,8 @@ var trialnumber
 func _ready():
 	print(Global.PlayerName)
 	#centre = Global.get_viewport_rect().size/2
-	centre = Vector2(1380, 540)
+	centre = Vector2($ColorRect.rect_global_position.x + 440,
+	$ColorRect.rect_global_position.y + 440)
 	#querydict = read_json_file("res://csvjson.json")
 	trialnumber = 0
 	set_trialdurations()
@@ -46,8 +44,9 @@ func _ready():
 ## This functions when the game is started
 
 func set_trialdurations():
-	timeforjustification = 100.0
-	timeformovement = 100.0
+	timeforjustification = 10.0
+	timeformovement = 10.0
+	timeforbotjustification = 10.0
 	
 func read_json_file(file_path):
 	var file = File.new()
@@ -66,20 +65,14 @@ func start_trial():
 	# Prepare the trial
 	reset_position()
 	querydict = Server.querydict
-	print(querydict[0])
-	q1 = querydict[trialnumber].question1.split("or")
-	q2 = querydict[trialnumber].question2.split("or")
-	q1_top = "[center]"+q1[0]+"[/center]"
-	q1_bot = "[center]"+q1[1]+"[/center]"
-	q2_top = "[center]"+q2[0]+"[/center]"
-	q2_bot = "[center]"+q2[1]+"[/center]"
-	$Q1_top.set_bbcode(q1_top)
-	$Q1_bot.set_bbcode(q1_bot)
-	$Q2_right.set_bbcode(q2_top)
-	$Q2_left.set_bbcode(q2_bot)
-
+	q1 = "[color=blue]Question 1: [/color]" + querydict[trialnumber].question1
+	q2 = "[color=red]Question 2: [/color]" + querydict[trialnumber].question2
+	$Q1.set_bbcode(q1)
+	$Q2.set_bbcode(q2)
+	toggle_question_visibility(true)
 	$Justification.visible = false
 	$Justification_text.visible = false
+	$BotJustifications.visible = false
 	$Player.can_move = true
 	$Timer.id = "start_trial"
 	start_timer(timeformovement) 
@@ -102,6 +95,10 @@ func start_timer(trial_duration):
 	$Timer.start(trial_duration)
 	$Timer.total_time = trial_duration
 
+func toggle_question_visibility(boolean):
+	$Q1.visible = boolean
+	$Q2.visible = boolean
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
@@ -111,22 +108,35 @@ func _on_Timer_timeout():
 	$Player.can_move = false
 	$Timer.stop()
 	if $Timer.id == "justification":
-		trialnumber = trialnumber + 1
-		start_trial()
 		remove_child(spawner)
 		justificationtext = $Justification.text
+		botjustification()
 		Global.sendtoserver(justificationtext, Global.PlayerName)
+		
 		
 	elif $Timer.id == "start_trial":
 		justification()
-
+		toggle_question_visibility(false)
+		
+	elif $Timer.id == "botjustification":
+		$BotJustifications.visible = false
+		trialnumber = trialnumber + 1
+		start_trial()
+	
 func justification():
 	$Justification.visible = true
 	$Justification_text.visible = true
 	$Justification.text = ""
 	$Timer.id = "justification"
 	start_timer(timeforjustification)
-	
+
+func botjustification():
+	$Justification.visible = false
+	$Justification_text.visible = false
+	$BotJustifications.visible = true
+	$Timer.id = "botjustification"
+	start_timer(timeforbotjustification)
+
 func reset_position():
 	$Player.global_position = centre
 
