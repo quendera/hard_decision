@@ -1,37 +1,45 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-
-var time
+# Declare graphics-related variables here. Examples:
 var centre
 
+# Declare time-related variables
+var time
 var timeformovement
 var timeforjustification
 
-var vector_array
+# Coordinates
 var coordinates
 var botscoordinates
+
+# Text Variables
 var justificationtext = ""
 var q1 = ""
 var q2 = ""
+
+# Import .json file
 var querydict = []
+
+# Preload scene for instancing
 var scene = preload("res://Scenes/Player.tscn")
 var others = preload("res://Scenes/Others.tscn")
-var trialnumber
 var spawner
+
+# Trial Information
+var trialnumber
 
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
-	print(Global.PlayerName)
 	centre = Global.get_viewport_rect().size/2
 	querydict = read_json_file("res://csvjson.json")
-	print(querydict)
 	trialnumber = 0
 	set_trialdurations()
 	align_stuff()
 	start_trial()
+
+## This functions when the game is started
 
 func set_trialdurations():
 	timeforjustification = 5.0
@@ -48,23 +56,34 @@ func align_stuff():
 	$LineH.global_position.y = centre.y
 	$LineV.global_position.x = centre.x
 
-func start_trial():
-	reset_position()
-	q1 = "[center]"+querydict[trialnumber].question1+"[/center]"
-	q2 = "[center]"+querydict[trialnumber].question2+"[/center]"
-	$Q1.set_bbcode(q1)
-	$Q2.set_bbcode(q2)
+## Start game!
 
-	$Justification.visible = false
-	$Justification_text.visible = false
-	$Player.can_move = true
+func start_trial():
+	# Prepare the trial
+	reset_position()
+	display_new_questions()
+	toggle_justification_visibility(false)
+	
+	# The trial should start now
 	$Timer.id = "start_trial"
 	start_timer(timeformovement) 
+	$Player.can_move = true
 	
 	botscoordinates = Vector2(querydict[trialnumber].xcoordinates,
 	 querydict[trialnumber].ycoordinates)
 	spawn_others(querydict[trialnumber].timeonset*timeformovement,botscoordinates)
-
+	spawn_others(querydict[trialnumber+1].timeonset*timeformovement,botscoordinates)
+	
+func display_new_questions():
+	q1 = "[center]"+querydict[trialnumber].question1+"[/center]"
+	q2 = "[center]"+querydict[trialnumber].question2+"[/center]"
+	$Q1.set_bbcode(q1)
+	$Q2.set_bbcode(q2)
+	
+func toggle_justification_visibility(boolean):
+	$Justification.visible = boolean
+	$Justification_text.visible = boolean
+	
 func spawn_others(spawn_time, botscoordinates):
 	var timetospawn = Timer.new()
 	add_child(timetospawn)
