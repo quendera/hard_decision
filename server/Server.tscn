@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Server.gd" type="Script" id=1]
 [ext_resource path="res://TiltNeon-Regular-VariableFont_XROT,YROT.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://frame.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 45
@@ -10,6 +11,10 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=2]
 size = 180
 outline_color = Color( 0.92549, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 80
 font_data = ExtResource( 2 )
 
 [node name="Server" type="Node"]
@@ -26,7 +31,7 @@ margin_bottom = 1080.0
 [node name="ColorRect" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0.611765, 0.87451, 1 )
+color = Color( 0.298039, 0.368627, 0.4, 1 )
 
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
 anchor_left = 0.5
@@ -56,10 +61,36 @@ margin_right = 421.0
 margin_bottom = 228.0
 
 [node name="title" type="Label" parent="Control/TopCenterContainer"]
-margin_right = 842.0
+margin_right = 1203.0
 margin_bottom = 228.0
 custom_fonts/font = SubResource( 2 )
-text = "Test Game"
+text = "Hard Decisions"
+
+[node name="n" type="Label" parent="Control"]
+margin_left = 1057.0
+margin_top = 832.0
+margin_right = 1899.0
+margin_bottom = 1060.0
+custom_fonts/font = SubResource( 3 )
+text = "0 Players connected"
+
+[node name="join" type="Label" parent="Control"]
+margin_left = 77.0
+margin_top = 443.0
+margin_right = 919.0
+margin_bottom = 671.0
+custom_fonts/font = SubResource( 3 )
+text = "Join here:
+
+
+
+
+http://192.168.1.101"
+
+[node name="Frame" type="Sprite" parent="Control"]
+position = Vector2( 283, 756 )
+scale = Vector2( 1.4, 1.4 )
+texture = ExtResource( 3 )
 
 [connection signal="timeout" from="tick_rate" to="." method="_on_tick_rate_timeout"]
 [connection signal="pressed" from="Control/CenterContainer/startgame" to="." method="_on_startgame_pressed"]
