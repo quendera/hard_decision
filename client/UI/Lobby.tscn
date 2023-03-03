@@ -43,4 +43,12 @@ grow_vertical = 2
 custom_fonts/font = SubResource( 2 )
 text = "Waiting for other players..."
 
+[node name="TextEdit" type="TextEdit" parent="."]
+margin_left = 432.0
+margin_top = 376.0
+margin_right = 632.0
+margin_bottom = 426.0
+rect_scale = Vector2( 5, 5 )
+
 [connection signal="pressed" from="StartGame" to="." method="_on_StartGame_pressed"]
+[connection signal="text_changed" from="TextEdit" to="." method="_on_TextEdit_text_changed"]
