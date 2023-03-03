@@ -15,10 +15,12 @@ var botscoordinates
 
 # Text Variables
 var justificationtext = ""
-var q1 = ""
-var q2 = ""
-
-# Import .json file
+var q1 = []
+var q2 = []
+var q1_top = ""
+var q2_top = ""
+var q1_bot = ""
+var q2_bot = ""
 var querydict = []
 
 # Preload scene for instancing
@@ -32,18 +34,20 @@ var trialnumber
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
-	centre = Global.get_viewport_rect().size/2
-	querydict = read_json_file("res://csvjson.json")
+	print(Global.PlayerName)
+	#centre = Global.get_viewport_rect().size/2
+	centre = Vector2(1380, 540)
+	#querydict = read_json_file("res://csvjson.json")
 	trialnumber = 0
 	set_trialdurations()
-	align_stuff()
+	# align_stuff()
 	start_trial()
 
 ## This functions when the game is started
 
 func set_trialdurations():
-	timeforjustification = 5.0
-	timeformovement = 5.0
+	timeforjustification = 100.0
+	timeformovement = 100.0
 	
 func read_json_file(file_path):
 	var file = File.new()
@@ -52,38 +56,34 @@ func read_json_file(file_path):
 	var content_as_dictionary = parse_json(content_as_text)
 	return content_as_dictionary
 	
-func align_stuff():
-	$LineH.global_position.y = centre.y
-	$LineV.global_position.x = centre.x
+#func align_stuff():
+#	$LineH.global_position.y = centre.y
+#	$LineV.global_position.x = 1380
 
 ## Start game!
 
 func start_trial():
 	# Prepare the trial
 	reset_position()
-	display_new_questions()
-	toggle_justification_visibility(false)
-	
-	# The trial should start now
+	querydict = Server.querydict
+	print(querydict[0])
+	q1 = querydict[trialnumber].question1.split("or")
+	q2 = querydict[trialnumber].question2.split("or")
+	q1_top = "[center]"+q1[0]+"[/center]"
+	q1_bot = "[center]"+q1[1]+"[/center]"
+	q2_top = "[center]"+q2[0]+"[/center]"
+	q2_bot = "[center]"+q2[1]+"[/center]"
+	$Q1_top.set_bbcode(q1_top)
+	$Q1_bot.set_bbcode(q1_bot)
+	$Q2_right.set_bbcode(q2_top)
+	$Q2_left.set_bbcode(q2_bot)
+
+	$Justification.visible = false
+	$Justification_text.visible = false
+	$Player.can_move = true
 	$Timer.id = "start_trial"
 	start_timer(timeformovement) 
-	$Player.can_move = true
-	
-	botscoordinates = Vector2(querydict[trialnumber].xcoordinates,
-	 querydict[trialnumber].ycoordinates)
-	spawn_others(querydict[trialnumber].timeonset*timeformovement,botscoordinates)
-	spawn_others(querydict[trialnumber+1].timeonset*timeformovement,botscoordinates)
-	
-func display_new_questions():
-	q1 = "[center]"+querydict[trialnumber].question1+"[/center]"
-	q2 = "[center]"+querydict[trialnumber].question2+"[/center]"
-	$Q1.set_bbcode(q1)
-	$Q2.set_bbcode(q2)
-	
-func toggle_justification_visibility(boolean):
-	$Justification.visible = boolean
-	$Justification_text.visible = boolean
-	
+
 func spawn_others(spawn_time, botscoordinates):
 	var timetospawn = Timer.new()
 	add_child(timetospawn)

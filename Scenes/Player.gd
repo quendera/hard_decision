@@ -4,6 +4,7 @@ var can_move = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var centre = Global.get_viewport_rect().size/2
+	#var centre = Vector2(1380, 540)
 	self.global_position = centre
 
 func _input(event):
@@ -15,7 +16,8 @@ func _input(event):
 	elif event is InputEventScreenTouch and !event.is_pressed():
 		self.scale = Vector2(1, 1)
 		coordinates = event.position
-		Global.sendtoserver(coordinates, Global.PlayerName)
+		send_player_state()
+		#Global.sendtoserver(coordinates, Global.PlayerName)
 		
 		#event.is
 	#	self.scale = Vector2(1, 1)	
@@ -24,3 +26,10 @@ func _input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+	
+
+func send_player_state():
+	var player_state = {
+		"P": get_global_position(),
+	}
+	Server.send_player_state(player_state)

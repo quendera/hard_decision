@@ -1,22 +1,20 @@
-extends Node2D
+extends Timer
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
-var window_size = get_viewport()
-var PlayerName = "test"
-var querydict = []
+var total_time = 0
 
+var id = ""
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-	
-func sendtoserver(dataentry, playerid):
-	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(_delta):
+	#print(self.time_left)
+	$TextureProgress.value = time_left/total_time * 100
+	
