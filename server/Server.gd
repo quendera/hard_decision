@@ -58,10 +58,17 @@ remote func broadcast_player_list(player_data):
 	player_list[player_id] = player_data
 	print("Broadcast player list ", player_list)
 	#rpc_id(0, "update_player_list", player_list)
+	if player_data["join_order"]  % 2 == 0:
+		rset_id(player_id, "show_botjustification", true)
 
 # separate variable containing only their names, so that I don't have to
 # send player's name along with his state every frame
 
+
+func reset_player_state():
+	for player_id in world_state.keys(): 
+		world_state[player_id].update_coordinate(1380, 540)
+		
 remote func receive_player_state(player_state):
 	var player_id = get_tree().get_rpc_sender_id() 
 	# If packets arrived out of order, and the new player_state is older than the old one, we ignore it
