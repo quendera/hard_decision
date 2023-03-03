@@ -23,8 +23,11 @@ var coord_2 = 0
 var bot1
 var botText
 
+var bot_colors = [[230, 25, 75,255], [60, 180, 75,255], [255, 225, 25,255], [0, 130, 200,255]]
 
-var player = preload("res://Game/player.tscn")
+var player = preload("res://Game/Player.tscn")
+
+var rand_color
 
 # Called when the node enters the scene tree for the first time.
 
@@ -34,6 +37,7 @@ func _ready():
 	querydict = get_parent().read_json_file("res://hard_task1_bot1_behaviour.json")
 	trialnumber = 0
 	#get_parent().test()
+	rand_color = bot_colors[randi() % bot_colors.size()]
 	set_trialdurations()
 	start_trial()
 
@@ -75,7 +79,7 @@ func _on_timetospawn_timeout():
 	bot1 = player.instance()
 	add_child(bot1)
 	bot1.update_coordinate(coord_1, coord_2)
-	bot1.set_color([255,0,0,1])
+	bot1.set_color(rand_color)
 	
 func start_timer(trial_duration):
 	$Timer.start(trial_duration)
