@@ -1,17 +1,19 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-
-var time
+# Declare graphics-related variables here. Examples:
 var centre
 
+# Declare time-related variables
+var time
 var timeformovement
 var timeforjustification
 
-var vector_array
+# Coordinates
 var coordinates
 var botscoordinates
+
+# Text Variables
 var justificationtext = ""
 var q1 = []
 var q2 = []
@@ -20,8 +22,13 @@ var q2_top = ""
 var q1_bot = ""
 var q2_bot = ""
 var querydict = []
+
+# Preload scene for instancing
 var scene = preload("res://Scenes/Player.tscn")
 var others = preload("res://Scenes/Others.tscn")
+var spawner
+
+# Trial Information
 var trialnumber
 
 # Called when the node enters the scene tree for the first time.
@@ -35,6 +42,8 @@ func _ready():
 	set_trialdurations()
 	# align_stuff()
 	start_trial()
+
+## This functions when the game is started
 
 func set_trialdurations():
 	timeforjustification = 100.0
@@ -51,7 +60,10 @@ func read_json_file(file_path):
 #	$LineH.global_position.y = centre.y
 #	$LineV.global_position.x = 1380
 
+## Start game!
+
 func start_trial():
+	# Prepare the trial
 	reset_position()
 	querydict = Server.querydict
 	print(querydict[0])
@@ -81,9 +93,10 @@ func spawn_others(spawn_time, botscoordinates):
 	timetospawn.connect("timeout", self, "_on_timetospawn_timeout")
 	
 func _on_timetospawn_timeout():
-	var spawner = others.instance()
+	spawner = others.instance()
 	add_child(spawner)
 	spawner.set_positions(botscoordinates)
+	spawner.z_index = -1
 	
 func start_timer(trial_duration):
 	$Timer.start(trial_duration)
@@ -100,6 +113,7 @@ func _on_Timer_timeout():
 	if $Timer.id == "justification":
 		trialnumber = trialnumber + 1
 		start_trial()
+		remove_child(spawner)
 		justificationtext = $Justification.text
 		Global.sendtoserver(justificationtext, Global.PlayerName)
 		

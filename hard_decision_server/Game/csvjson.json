@@ -6,7 +6,8 @@
     "question2": "Hello Kitty or Pokemon",
     "xcoordinates": 245,
     "ycoordinates": 616,
-    "justification": "i like trains"
+    "justification": "i like trains",
+    "timeonset": 0.9
   },
   {
     "ID": "smart",
@@ -15,7 +16,8 @@
     "question2": "Hello or Boh",
     "xcoordinates": 917,
     "ycoordinates": 124,
-    "justification": "i like myself"
+    "justification": "i like myself",
+    "timeonset": 0.6
   },
   {
     "ID": "smart",
@@ -24,7 +26,8 @@
     "question2": "Hello Kitty or Pokemon",
     "xcoordinates": 623,
     "ycoordinates": 111,
-    "justification": "i like  computers"
+    "justification": "i like  computers",
+    "timeonset": 0.2
   },
   {
     "ID": "smart",
@@ -33,7 +36,8 @@
     "question2": "Hello or Boh",
     "xcoordinates": 182,
     "ycoordinates": 212,
-    "justification": "i like dsladsladsa"
+    "justification": "i like dsladsladsa",
+    "timeonset": 0.98
   },
   {
     "ID": "smart",
@@ -42,7 +46,8 @@
     "question2": "Hello Kitty or Pokemon",
     "xcoordinates": 195,
     "ycoordinates": 573,
-    "justification": "i like surving"
+    "justification": "i like surving",
+    "timeonset": 0.5
   },
   {
     "ID": "smart",
@@ -51,7 +56,8 @@
     "question2": "Hello or Boh",
     "xcoordinates": 953,
     "ycoordinates": 344,
-    "justification": "i like my mom"
+    "justification": "i like my mom",
+    "timeonset": 0.66
   },
   {
     "ID": "smart",
@@ -60,7 +66,8 @@
     "question2": "Hello Kitty or Pokemon",
     "xcoordinates": 213,
     "ycoordinates": 358,
-    "justification": "i like trains"
+    "justification": "i like trains",
+    "timeonset": 0.86
   },
   {
     "ID": "smart",
@@ -69,6 +76,7 @@
     "question2": "Hello or Boh",
     "xcoordinates": 393,
     "ycoordinates": 1013,
-    "justification": "iLOVEEEEEE champalimaud foundation!!!!!!!!!!!!!!!!!"
+    "justification": "iLOVEEEEEE champalimaud foundation!!!!!!!!!!!!!!!!!",
+    "timeonset": 0.1
   }
 ]
