@@ -114,12 +114,10 @@ custom_fonts/normal_font = SubResource( 1 )
 text = "Enter your justification in the box below:"
 
 [node name="Justification" type="TextEdit" parent="."]
-
 margin_left = 100.0
 margin_top = 116.0
 margin_right = 980.0
 margin_bottom = 716.0
-
 custom_fonts/font = SubResource( 2 )
 wrap_enabled = true
 

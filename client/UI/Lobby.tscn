@@ -46,10 +46,10 @@ other players..."
 align = 1
 
 [node name="TextEdit" type="TextEdit" parent="."]
-margin_left = 432.0
-margin_top = 376.0
-margin_right = 632.0
-margin_bottom = 426.0
+margin_left = 42.0
+margin_top = 776.0
+margin_right = 242.0
+margin_bottom = 826.0
 rect_scale = Vector2( 5, 5 )
 
 [connection signal="pressed" from="StartGame" to="." method="_on_StartGame_pressed"]
