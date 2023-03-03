@@ -11,7 +11,7 @@ var playerColor = [[255,127,15,255], [43,160,43,255], [148,103,189,255], [140,86
 #rgba(214,39,39,255)
 #rgba(31,119,180,255)
 var game = preload("res://Game/Game.tscn")
-var player = preload("res://Game/player.tscn")
+var player = preload("res://Game/Player.tscn")
 
 var PROD = OS.get_environment("PROD") or Array(OS.get_cmdline_args()).has("-prod")
 var server = WebSocketServer.new() # NetworkedMultiplayerENet.new()

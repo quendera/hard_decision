@@ -139,5 +139,3 @@ func botjustification():
 
 func reset_position():
 	$Player.global_position = centre
-
-

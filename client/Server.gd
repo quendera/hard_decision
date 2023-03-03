@@ -18,6 +18,7 @@ var player_list = []
 var url = "ws://127.0.0.1:7070"
 #var url = "ws://192.168.1.102:7070"
 
+
 func _ready():
 	pass
 	# Start the game automatically, without going through the lobby
