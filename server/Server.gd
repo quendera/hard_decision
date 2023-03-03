@@ -2,9 +2,12 @@ extends Node
 
 var player_list = {} 
 var player_states = {}
-var world_state = {
-	"player_states": {}
-}
+var world_state = {}
+var querydict = []
+var playerColor = [[1,0,0,1]]
+
+var game = preload("res://Game/Game.tscn")
+var player = preload("res://Game/player.tscn")
 
 var PROD = OS.get_environment("PROD") or Array(OS.get_cmdline_args()).has("-prod")
 var server = WebSocketServer.new() # NetworkedMultiplayerENet.new()
@@ -36,10 +39,12 @@ func _peer_connected(player_id):
 
 func _peer_disconnected(player_id):
 	print("User " + str(player_id) + " disconnected")
+	if player_list.has(player_id):
+		player_list.erase(player_id)
 	if player_states.has(player_id):
 		player_states.erase(player_id)
-		player_list.erase(player_id)
-		rpc_id(0, "update_player_list", player_list)
+		#remove_child()
+		#rpc_id(0, "update_player_list", player_list)
 
 remote func broadcast_player_list(player_data):
 	# Once player is _connected_to_server, they'll send me their info(name)
@@ -56,31 +61,34 @@ remote func broadcast_player_list(player_data):
 remote func receive_player_state(player_state):
 	var player_id = get_tree().get_rpc_sender_id() 
 	# If packets arrived out of order, and the new player_state is older than the old one, we ignore it
-	player_states[player_id] = player_state
+	if player_states.has(player_id):
+		player_states[player_id] = player_state
+	else:
+		player_states[player_id] = player_state
+		var newplayer = player.instance()
+		world_state[player_id] = newplayer
+		add_child(world_state[player_id])
+	var coordinates = player_states[player_id]['P']
+	world_state[player_id].update_coordinate(coordinates[0],coordinates[1])
+	print(player_list[player_id]["join_order"])
+	#world_state[player_id].set_color(playerColor[player_list[player_id]["join_order"]])
 
 
 func _on_tick_rate_timeout():
-	# Broadcast world state every time the timer times out (every 0.05s. That's 20fps).
-	#world_state["player_states"] = player_states.duplicate(true) # Deep copy
-	#rpc_unreliable_id(0, "receive_world_state", world_state)
-	#print(player_list)
 	pass
 
-var querydict = []
 func _on_startgame_pressed():
 	querydict = read_json_file("res://csvjson.json")
 	print("Start clicked")
 	for player_id in player_list.keys(): 
 		print(player_id)
-		rset_id(player_id,"querydict",querydict)
+		rset_id(player_id, "querydict", querydict)
 		rpc_id(player_id, "start_game")
-	get_tree().change_scene("res://Game/Game.tscn")
-	#for player_id in player_list.keys(): 
-	#	print("Updating Question")
-	#	print(querydict[0])
-	#	rpc_unreliable_id(player_id, "update_question", "")
-
+	$Control.visible = false
+	var instance = game.instance()
+	add_child(instance)
 	
+
 func read_json_file(file_path):
 	var file = File.new()
 	file.open(file_path, File.READ)
