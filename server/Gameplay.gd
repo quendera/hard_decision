@@ -13,51 +13,52 @@ var botscoordinates
 var justificationtext = ""
 var q1 = []
 var q2 = []
-var q1_top = ""
-var q2_top = ""
-var q1_bot = ""
-var q2_bot = ""
 var querydict = []
 var trialnumber
+
+var rt = 0
+var coord_1 = 0
+var coord_2 = 0
+var bot1
+
+
+var player = preload("res://Game/player.tscn")
 
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
 	#centre = Global.get_viewport_rect().size/2
 	centre = Vector2(1380, 540)
-	querydict = read_json_file("res://csvjson.json")
+	querydict = get_parent().read_json_file("res://hard_task1_bot1_behaviour.json")
 	trialnumber = 0
+	#get_parent().test()
 	set_trialdurations()
 	start_trial()
 
 func set_trialdurations():
-	timeforjustification = 100.0
-	timeformovement = 100.0
+	timeforjustification = 10.0
+	timeformovement = 10.0
 
 func start_trial():
 	#Server.send_update_question(querydict[trialnumber])
-	q1 = querydict[trialnumber].question1.split("or")
-	q2 = querydict[trialnumber].question2.split("or")
-	q1_top = "[center]"+q1[0]+"[/center]"
-	q1_bot = "[center]"+q1[1]+"[/center]"
-	q2_top = "[center]"+q2[0]+"[/center]"
-	q2_bot = "[center]"+q2[1]+"[/center]"
-	$Q1_top.set_bbcode(q1_top)
-	$Q1_bot.set_bbcode(q1_bot)
-	$Q2_right.set_bbcode(q2_top)
-	$Q2_left.set_bbcode(q2_bot)
+	q1 = "[color=blue]Question 1: [/color] \n" + querydict[trialnumber].prompt1
+	q2 = "[color=red]Question 2: [/color] \n" + querydict[trialnumber].prompt2
+	$Q1.set_bbcode(q1)
+	$Q2.set_bbcode(q2)
+	toggle_question_visibility(true)
 	$Timer.id = "start_trial"
-	start_timer(timeformovement) 
+	start_timer(timeformovement)
+	rt = querydict[trialnumber].rt
+	coord_1 = 1380 + querydict[trialnumber].coord1 * 4
+	coord_2 = 540 + querydict[trialnumber].coord2 * 4
+	spawn_others(rt*timeformovement)
 
-func read_json_file(file_path):
-	var file = File.new()
-	file.open(file_path, File.READ)
-	var content_as_text = file.get_as_text()
-	var content_as_dictionary = parse_json(content_as_text)
-	return content_as_dictionary
+func toggle_question_visibility(boolean):
+	$Q1.visible = boolean
+	$Q2.visible = boolean
 	
-
-func spawn_others(spawn_time, botscoordinates):
+func spawn_others(spawn_time):
+	print(spawn_time)
 	var timetospawn = Timer.new()
 	add_child(timetospawn)
 	timetospawn.wait_time = spawn_time
@@ -65,11 +66,12 @@ func spawn_others(spawn_time, botscoordinates):
 	timetospawn.start()
 	timetospawn.connect("timeout", self, "_on_timetospawn_timeout")
 	
-#func _on_timetospawn_timeout():
-#	spawner = others.instance()
-#	add_child(spawner)
-#	spawner.set_positions(botscoordinates)
-#	spawner.z_index = -1
+func _on_timetospawn_timeout():
+	print("SPAWN")
+	bot1 = player.instance()
+	add_child(bot1)
+	bot1.update_coordinate(coord_1, coord_2)
+	bot1.set_color([255,0,0,1])
 	
 func start_timer(trial_duration):
 	$Timer.start(trial_duration)
@@ -87,6 +89,7 @@ func _on_Timer_timeout():
 	elif $Timer.id == "start_trial":
 		trialnumber = trialnumber + 1
 		start_trial()
+		remove_child(bot1)
 		#justification()
 
 func justification():
@@ -96,9 +99,10 @@ func justification():
 	$Timer.id = "justification"
 	start_timer(timeforjustification)
 	
+	
 func reset_position():
 	$Player.global_position = centre
-
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

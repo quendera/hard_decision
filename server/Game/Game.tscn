@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://TiltNeon-Regular-VariableFont_XROT,YROT.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Game/Text.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/Timer.gd" type="Script" id=4]
+[ext_resource path="res://fontforquest.tres" type="DynamicFont" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -25,53 +26,70 @@ color = Color( 0.588235, 0.588235, 0.588235, 1 )
 position = Vector2( 1236, -240.886 )
 scale = Vector2( 0.990052, 0.941952 )
 points = PoolVector2Array( -808.038, 1189.52, -808.038, 254.669 )
-default_color = Color( 0.392157, 0.764706, 1, 1 )
+default_color = Color( 0.972549, 0.121569, 0.00784314, 1 )
 
 [node name="LineH" type="Line2D" parent="ColorRect"]
 position = Vector2( 1844, -28 )
 points = PoolVector2Array( -960, 464, -1848, 464 )
-default_color = Color( 0.392157, 0.764706, 1, 1 )
+default_color = Color( 0, 0.270588, 0.992157, 1 )
 
-[node name="Q1_top" parent="." instance=ExtResource( 3 )]
-margin_left = 890.0
-margin_right = 1870.0
+[node name="Q1" type="RichTextLabel" parent="."]
+margin_left = 50.0
+margin_top = 100.0
+margin_right = 750.0
+margin_bottom = 350.0
+custom_fonts/normal_font = ExtResource( 5 )
+bbcode_enabled = true
+
+[node name="Q2" type="RichTextLabel" parent="."]
+margin_left = 50.0
+margin_top = 350.0
+margin_right = 750.0
+margin_bottom = 600.0
+custom_fonts/normal_font = ExtResource( 5 )
+bbcode_enabled = true
+
+[node name="Top" parent="." instance=ExtResource( 3 )]
+margin_left = 1270.0
+margin_top = -3.0
+margin_right = 1482.0
 margin_bottom = 100.0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 meta_underlined = false
-text = ""
+text = "Agree"
 scroll_active = false
 
-[node name="Q1_bot" parent="." instance=ExtResource( 3 )]
-margin_left = 890.0
+[node name="Bottom" parent="." instance=ExtResource( 3 )]
+margin_left = 1215.0
 margin_top = 980.0
-margin_right = 1870.0
+margin_right = 1541.0
 margin_bottom = 1080.0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 meta_underlined = false
-text = ""
+text = "Disagree"
 scroll_active = false
 
-[node name="Q2_right" parent="." instance=ExtResource( 3 )]
+[node name="Right" parent="." instance=ExtResource( 3 )]
 margin_left = 1920.0
-margin_top = 50.0
-margin_right = 2900.0
-margin_bottom = 150.0
+margin_top = 433.0
+margin_right = 2130.0
+margin_bottom = 533.0
 rect_rotation = 90.0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-text = ""
+text = "Agree"
 
-[node name="Q2_left" parent="." instance=ExtResource( 3 )]
+[node name="Left" parent="." instance=ExtResource( 3 )]
 margin_left = 840.0
-margin_top = 1030.0
-margin_right = 1820.0
-margin_bottom = 1130.0
+margin_top = 681.0
+margin_right = 1136.0
+margin_bottom = 781.0
 rect_rotation = -90.0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-text = ""
+text = "Disagree"
 
 [node name="Timer" type="Timer" parent="."]
 script = ExtResource( 4 )

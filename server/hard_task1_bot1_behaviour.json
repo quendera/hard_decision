@@ -1,0 +1,152 @@
+[
+    {
+        "ID": 1,
+        "pairs": 1,
+        "prompt1": "It is better to be loved than to be feared",
+        "prompt2": "It is acceptable to lie to protect your own interests ",
+        "coord1": -35,
+        "coord2": -14,
+        "rt": 0.21,
+        "justification": "I believe it is better to be respected than to be loved or feared. We should strive to be honest and ethical, even when it is not convenient. Lying to protect oneself implies that the ends justify the means, which I do not agree with."
+    },
+    {
+        "ID": 1,
+        "pairs": 2,
+        "prompt1": "Government should regulate social media to prevent fake news and hate speech",
+        "prompt2": "The world is complex and there are no simple solutions to most problems",
+        "coord1": 11,
+        "coord2": -32,
+        "rt": 0.3,
+        "justification": "I agree that government should take some steps to regulate social media, however it is important to recognize that this is a complex problem. We must be careful not to oversimplify solutions, as this can lead to unintended consequences."
+    },
+    {
+        "ID": 1,
+        "pairs": 3,
+        "prompt1": "Schools should have mandatory drug testing for students ",
+        "prompt2": "College education should be free",
+        "coord1": -94,
+        "coord2": -70,
+        "rt": 0.57,
+        "justification": "I strongly disagree with mandatory drug testing for students, as I believe it is an invasion of privacy and does not address the root of the problem. I also disagree with making college education free, as this would place a large strain on the public budget. Instead, I think there should be more affordable options for students."
+    },
+    {
+        "ID": 1,
+        "pairs": 4,
+        "prompt1": "It is acceptable to lie to protect the feelings of somebody else",
+        "prompt2": "The meaning of life is subjective and can differ from person to person",
+        "coord1": -28,
+        "coord2": -13,
+        "rt": 0.31,
+        "justification": "I disagree with lying to protect someone's feelings, as it can lead to a lack of trust and can be detrimental to relationships. I do agree that the meaning of life is subjective and can differ from person to person, as each individual has their own unique perspective."
+    },
+    {
+        "ID": 1,
+        "pairs": 5,
+        "prompt1": "It is justifiable to use violence to promote political change",
+        "prompt2": "Voting should be mandatory ",
+        "coord1": -68,
+        "coord2": 36,
+        "rt": 0.59,
+        "justification": "I strongly disagree with using violence to promote political change, as this often causes more harm than good. I support voting being mandatory, as it ensures the voices of all citizens are heard and helps to create a more equitable society."
+    },
+    {
+        "ID": 1,
+        "pairs": 6,
+        "prompt1": "It is better to be honest than kind",
+        "prompt2": "There is both good and bad in every person and situation",
+        "coord1": 31,
+        "coord2": 58,
+        "rt": 0.54,
+        "justification": "I agree that it is important to be honest, as this helps to build trust and foster meaningful relationships. At the same time, I believe it is also important to be kind and considerate of others. I agree that there is both good and bad in every person and situation, and it is important to recognize both in order to make informed decisions."
+    },
+    {
+        "ID": 1,
+        "pairs": 7,
+        "prompt1": "Drinking age should be lowered",
+        "prompt2": "Freedom is more important than safety and security",
+        "coord1": -14,
+        "coord2": 5,
+        "rt": 0.92,
+        "justification": "I disagree with lowering the drinking age, as this would likely lead to an increase in alcohol-related health risks. I also believe that freedom and safety are both important, and there should be a balance between the two. We should strive to create an environment where people can feel secure without sacrificing their freedoms."
+    },
+    {
+        "ID": 1,
+        "pairs": 8,
+        "prompt1": "Perception shapes reality, but what we percieve is subjective",
+        "prompt2": "It is acceptable to lie to protect the feelings of somebody else",
+        "coord1": 36,
+        "coord2": 67,
+        "rt": 0.65,
+        "justification": "I agree that perception shapes reality, as our individual experiences and interpretations of the world can have a profound impact on our lives. However, I disagree with lying to protect someone's feelings, as this can lead to a lack of trust and can be detrimental to relationships."
+    },
+    {
+        "ID": 1,
+        "pairs": 9,
+        "prompt1": "The government should provide basic income to all citizens",
+        "prompt2": "The minimum wage should be increased",
+        "coord1": -53,
+        "coord2": 53,
+        "rt": 0.15,
+        "justification": "I disagree with providing basic income to all citizens, as this would be a strain on the public budget. I do support increasing the minimum wage, as it would help to ensure that everyone is earning a fair and livable wage."
+    },
+    {
+        "ID": 1,
+        "pairs": 10,
+        "prompt1": "No one is perfect, and everyone makes mistakes",
+        "prompt2": "It is impossible to truly understand what someone else is feeling or experiencing",
+        "coord1": 57,
+        "coord2": -37,
+        "rt": 0.66,
+        "justification": "I agree that no one is perfect and everyone makes mistakes, as this is part of the human experience. However, I disagree that it is impossible to truly understand what someone else is feeling or experiencing, as we can use empathy and compassion to try to gain insight into someone else's perspective."
+    },
+    {
+        "ID": 1,
+        "pairs": 11,
+        "prompt1": "Beauty is in the eye of the beholder",
+        "prompt2": "It is acceptable to lie to protect the feelings of somebody else",
+        "coord1": 16,
+        "coord2": 7,
+        "rt": 0.75,
+        "justification": "I agree that beauty is subjective and is in the eye of the beholder. However, I disagree with lying to protect someone's feelings, as this can lead to a lack of trust and can be detrimental to relationships."
+    },
+    {
+        "ID": 1,
+        "pairs": 12,
+        "prompt1": "Everyone deserves love and respect",
+        "prompt2": "The use of recreational drugs should be decriminalized",
+        "coord1": 65,
+        "coord2": 19,
+        "rt": 0.24,
+        "justification": "I agree that everyone deserves love and respect, as this helps to create a more equitable and compassionate society. I also support decriminalizing the use of recreational drugs, as this would help to reduce the stigma surrounding drug use and ensure that individuals who use drugs are not criminalized."
+    },
+    {
+        "ID": 1,
+        "pairs": 13,
+        "prompt1": "The benefits of social media outweigh the risks",
+        "prompt2": "Artificial intelligence will surpass human intelligence in the near future",
+        "coord1": 17,
+        "coord2": 32,
+        "rt": 0.87,
+        "justification": "I agree that the benefits of social media outweigh the risks, as it can provide a platform for people to connect with one another and share ideas. I also believe that artificial intelligence will surpass human intelligence in the near future, as technology continues to rapidly evolve."
+    },
+    {
+        "ID": 1,
+        "pairs": 14,
+        "prompt1": "Space exploration is a worthwhile investment",
+        "prompt2": "The use of surveillance technology is necessary for public safety",
+        "coord1": -95,
+        "coord2": 91,
+        "rt": 0.34,
+        "justification": "I strongly disagree with investing in space exploration, as I believe there are more pressing matters requiring attention, such as poverty and climate change. On the other hand, I agree that the use of surveillance technology can be necessary in order to ensure public safety."
+    },
+    {
+        "ID": 1,
+        "pairs": 15,
+        "prompt1": "It is acceptable to lie to protect the feelings of somebody else",
+        "prompt2": "Vaccinations should be mandatory for all children",
+        "coord1": 18,
+        "coord2": -39,
+        "rt": 0.71,
+        "justification": "I disagree with lying to protect someone's feelings, as it can lead to a lack of trust and can be detrimental to relationships. I also disagree with making vaccinations mandatory for all children, as this could infringe on the rights of parents to make decisions for their children."
+    }
+]
