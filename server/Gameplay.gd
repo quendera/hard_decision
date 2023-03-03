@@ -17,6 +17,8 @@ var q2 = []
 var querydict = []
 var trialnumber
 
+var all_states = []
+
 var rt = 0
 var coord_1 = 0
 var coord_2 = 0
@@ -37,7 +39,10 @@ func _ready():
 	querydict = get_parent().read_json_file("res://hard_task1_bot1_behaviour.json")
 	trialnumber = 0
 	#get_parent().test()
-	rand_color = bot_colors[randi() % bot_colors.size()]
+	randomize()
+	var idx = randi() % 4
+	rand_color = bot_colors[idx]
+	get_parent().send_bot_color(idx)
 	set_trialdurations()
 	start_trial()
 
@@ -47,19 +52,26 @@ func set_trialdurations():
 	timeforbotjustification = 10.0
 
 func start_trial():
-	#Server.send_update_question(querydict[trialnumber])
-	q1 = "[color=blue]Question 1: [/color] \n" + querydict[trialnumber].prompt1
-	q2 = "[color=red]Question 2: [/color] \n" + querydict[trialnumber].prompt2
-	$Q1.set_bbcode(q1)
-	$Q2.set_bbcode(q2)
-	toggle_question_visibility(true)
-	$Timer.id = "start_trial"
-	start_timer(timeformovement)
-	rt = querydict[trialnumber].rt
-	coord_1 = 1380 + querydict[trialnumber].coord1 * 4
-	coord_2 = 540 + querydict[trialnumber].coord2 * 4
-	botText = querydict[trialnumber].justification
-	spawn_others(rt*timeformovement)
+	if trialnumber == 2 :
+		var file = File.new()
+		file.open("user://response_INDP.json", File.WRITE)
+		file.seek_end()
+		file.store_line(to_json(all_states))
+		get_tree().quit()
+	else:
+		#Server.send_update_question(querydict[trialnumber])
+		q1 = "[color=blue]Question 1: [/color] \n" + querydict[trialnumber].prompt1
+		q2 = "[color=red]Question 2: [/color] \n" + querydict[trialnumber].prompt2
+		$Q1.set_bbcode(q1)
+		$Q2.set_bbcode(q2)
+		toggle_question_visibility(true)
+		$Timer.id = "start_trial"
+		start_timer(timeformovement)
+		rt = querydict[trialnumber].rt
+		coord_1 = 1380 + querydict[trialnumber].coord1 * 4
+		coord_2 = 540 + querydict[trialnumber].coord2 * 4
+		botText = querydict[trialnumber].justification
+		spawn_others(rt*timeformovement)
 
 func toggle_question_visibility(boolean):
 	$Q1.visible = boolean
@@ -89,15 +101,18 @@ func _on_Timer_timeout():
 	print("times up")
 	$Timer.stop()
 	if $Timer.id == "justification":
-		remove_child(bot1)
+		$BotJustification.visible = true
 		botjustification()
+		save_state()
 		## TODO Global.sendtoserver(justificationtext, Global.PlayerName)
 	elif $Timer.id == "start_trial":
 		justification()
 		toggle_question_visibility(false)
 	elif $Timer.id == "botjustification":
-		$BotJustifications.visible = false
+		$BotJustification.visible = false
 		trialnumber = trialnumber + 1
+		remove_child(bot1)
+		get_parent().reset_player_state()
 		start_trial()
 	
 func justification():
@@ -105,14 +120,15 @@ func justification():
 	start_timer(timeforjustification)
 	
 func botjustification():
-
 	$Timer.id = "botjustification"
 	start_timer(timeforbotjustification)
+
+func save_state():
+	all_states.append(get_parent().player_states.duplicate(true))
+
 	
 func reset_position():
 	$Player.global_position = centre
-	
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

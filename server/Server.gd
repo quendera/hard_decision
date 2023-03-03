@@ -2,6 +2,7 @@ extends Node
 
 var player_list = {} 
 var player_states = {}
+var player_response = {}
 var world_state = {}
 var querydict = []
 #var playerColor = ["crimson"]
@@ -62,10 +63,13 @@ remote func broadcast_player_list(player_data):
 # separate variable containing only their names, so that I don't have to
 # send player's name along with his state every frame
 
-
 func reset_player_state():
 	for player_id in world_state.keys(): 
 		world_state[player_id].update_coordinate(1380, 540)
+
+remote func receive_player_justication(player_response):
+	var player_id = get_tree().get_rpc_sender_id() 
+	player_states[player_id]['response'] = player_response
 		
 remote func receive_player_state(player_state):
 	var player_id = get_tree().get_rpc_sender_id() 
@@ -107,4 +111,6 @@ func read_json_file(file_path):
 #func send_update_question(querydict):
 #	pass
 
-
+func send_bot_color(bot_id):
+	for player_id in player_list.keys(): 
+		rset_id(player_id, "bot_id", bot_id)

@@ -5,7 +5,7 @@ extends Timer
 # var a = 2
 # var b = "text"
 
-var total_time = 0
+var total_time = 10
 
 var id = ""
 # Called when the node enters the scene tree for the first time.
