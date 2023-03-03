@@ -38,6 +38,8 @@ func _process(delta):
 
 func _peer_connected(player_id):
 	print("User " + str(player_id) + " connected")
+	
+	$Control/n.text = str(player_list.size()+1) + " Players Connected"
 
 func _peer_disconnected(player_id):
 	print("User " + str(player_id) + " disconnected")
