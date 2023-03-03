@@ -78,6 +78,9 @@ custom_fonts/normal_font = SubResource( 1 )
 text = "Enter your justification in the box below:"
 
 [node name="Justification" type="TextEdit" parent="."]
+modulate = Color( 1, 1, 1, 0.686275 )
+self_modulate = Color( 1, 1, 1, 0.686275 )
+light_mask = 31
 margin_left = -453.0
 margin_top = -378.0
 margin_right = 447.0

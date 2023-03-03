@@ -60,7 +60,9 @@ func start_trial():
 	$Player.can_move = true
 	$Timer.id = "start_trial"
 	start_timer(timeformovement) 
-	botscoordinates = Vector2(300,300)
+	
+	botscoordinates = Vector2(querydict[trialnumber].xcoordinates,
+	 querydict[trialnumber].ycoordinates)
 	spawn_others(querydict[trialnumber].timeonset*timeformovement,botscoordinates)
 
 func spawn_others(spawn_time, botscoordinates):
@@ -75,6 +77,7 @@ func _on_timetospawn_timeout():
 	spawner = others.instance()
 	add_child(spawner)
 	spawner.set_positions(botscoordinates)
+	spawner.z_index = -1
 	
 func start_timer(trial_duration):
 	$Timer.start(trial_duration)

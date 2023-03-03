@@ -6,7 +6,6 @@ func _ready():
 	pass
 	
 func set_positions(coordinates):
-	print(coordinates)
 	self.global_position = coordinates
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
