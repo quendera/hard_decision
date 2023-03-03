@@ -60,7 +60,6 @@ func _connected_to_server():
 	var player_data = {}
 	# temporarily use ids instead of names
 	player_data = { "player_name": str(get_tree().get_network_unique_id()) }
-	get_tree().change_scene("res://Scenes/Game.tscn")
 	rpc_id(1, "broadcast_player_list", player_data)
 
 remote func update_player_list(players):
@@ -84,6 +83,10 @@ remote func receive_world_state(world_state):
 	world.receive_world_state(world_state)
 	# print("Server Time: ", print_time(world_state["T"]), "\tClient Time: ", print_time(client_clock))
 	print("Difference: ", world_state["T"] - client_clock)
+
+remote func start_game():
+	get_tree().change_scene("res://Scenes/Game.tscn")
+
 
 
 # CLOCK SYNC

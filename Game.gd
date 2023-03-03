@@ -13,8 +13,12 @@ var vector_array
 var coordinates
 var botscoordinates
 var justificationtext = ""
-var q1 = ""
-var q2 = ""
+var q1 = []
+var q2 = []
+var q1_top = ""
+var q2_top = ""
+var q1_bot = ""
+var q2_bot = ""
 var querydict = []
 var scene = preload("res://Scenes/Player.tscn")
 var others = preload("res://Scenes/Others.tscn")
@@ -24,11 +28,12 @@ var trialnumber
 
 func _ready():
 	print(Global.PlayerName)
-	centre = Global.get_viewport_rect().size/2
+	#centre = Global.get_viewport_rect().size/2
+	centre = Vector2(1380, 540)
 	querydict = read_json_file("res://csvjson.json")
 	trialnumber = 0
 	set_trialdurations()
-	align_stuff()
+	# align_stuff()
 	start_trial()
 
 func set_trialdurations():
@@ -42,16 +47,22 @@ func read_json_file(file_path):
 	var content_as_dictionary = parse_json(content_as_text)
 	return content_as_dictionary
 	
-func align_stuff():
-	$LineH.global_position.y = centre.y
-	$LineV.global_position.x = centre.x
+#func align_stuff():
+#	$LineH.global_position.y = centre.y
+#	$LineV.global_position.x = 1380
 
 func start_trial():
 	reset_position()
-	q1 = "[center]"+querydict[trialnumber].question1+"[/center]"
-	q2 = "[center]"+querydict[trialnumber].question2+"[/center]"
-	$Q1.set_bbcode(q1)
-	$Q2.set_bbcode(q2)
+	q1 = querydict[trialnumber].question1.split("or")
+	q2 = querydict[trialnumber].question2.split("or")
+	q1_top = "[center]"+q1[0]+"[/center]"
+	q1_bot = "[center]"+q1[1]+"[/center]"
+	q2_top = "[center]"+q2[0]+"[/center]"
+	q2_bot = "[center]"+q2[1]+"[/center]"
+	$Q1_top.set_bbcode(q1_top)
+	$Q1_bot.set_bbcode(q1_bot)
+	$Q2_right.set_bbcode(q2_top)
+	$Q2_left.set_bbcode(q2_bot)
 
 	$Justification.visible = false
 	$Justification_text.visible = false

@@ -4,6 +4,7 @@ var can_move = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var centre = Global.get_viewport_rect().size/2
+	#var centre = Vector2(1380, 540)
 	self.global_position = centre
 
 func _input(event):
