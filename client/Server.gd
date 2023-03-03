@@ -5,8 +5,9 @@ var q1_top = ""
 var q2_top = ""
 var q1_bot = ""
 var q2_bot = ""
+remote var show_botjustification = false
 remote var querydict = []
-
+ 
 var client
 
 # Enable dev mode by launching the game with -dev flag or "DEV=true" env variable.

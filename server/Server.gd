@@ -4,12 +4,10 @@ var player_list = {}
 var player_states = {}
 var world_state = {}
 var querydict = []
-var playerColor = [[255,127,15,255], [43,160,43,255], [148,103,189,255], [140,86,76,255]]
 #var playerColor = ["crimson"]
+var playerColor = [[245, 130, 48,255], [145, 30, 180,255], [70, 240, 240,255], [240, 50, 230,255], [210, 245, 60,255], [250, 190, 212,255], [0, 128, 128,255], [220, 190, 255,255], [170, 110, 40,255], [255, 250, 200,255], [128, 0, 0,255], [170, 255, 195,255], [128, 128, 0,255], [255, 215, 180,255], [0, 0, 128,255], [128, 128, 128,255], [255, 255, 255,255]]
 
 
-#rgba(214,39,39,255)
-#rgba(31,119,180,255)
 var game = preload("res://Game/Game.tscn")
 var player = preload("res://Game/Player.tscn")
 
@@ -58,10 +56,17 @@ remote func broadcast_player_list(player_data):
 	player_list[player_id] = player_data
 	print("Broadcast player list ", player_list)
 	#rpc_id(0, "update_player_list", player_list)
+	if player_data["join_order"]  % 2 == 0:
+		rset_id(player_id, "show_botjustification", true)
 
 # separate variable containing only their names, so that I don't have to
 # send player's name along with his state every frame
 
+
+func reset_player_state():
+	for player_id in world_state.keys(): 
+		world_state[player_id].update_coordinate(1380, 540)
+		
 remote func receive_player_state(player_state):
 	var player_id = get_tree().get_rpc_sender_id() 
 	# If packets arrived out of order, and the new player_state is older than the old one, we ignore it

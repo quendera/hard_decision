@@ -7,6 +7,7 @@ var time
 var centre
 var timeformovement
 var timeforjustification
+var timeforbotjustification
 var vector_array
 var coordinates
 var botscoordinates
@@ -20,9 +21,13 @@ var rt = 0
 var coord_1 = 0
 var coord_2 = 0
 var bot1
+var botText
 
+var bot_colors = [[230, 25, 75,255], [60, 180, 75,255], [255, 225, 25,255], [0, 130, 200,255]]
 
-var player = preload("res://Game/player.tscn")
+var player = preload("res://Game/Player.tscn")
+
+var rand_color
 
 # Called when the node enters the scene tree for the first time.
 
@@ -32,12 +37,14 @@ func _ready():
 	querydict = get_parent().read_json_file("res://hard_task1_bot1_behaviour.json")
 	trialnumber = 0
 	#get_parent().test()
+	rand_color = bot_colors[randi() % bot_colors.size()]
 	set_trialdurations()
 	start_trial()
 
 func set_trialdurations():
 	timeforjustification = 10.0
 	timeformovement = 10.0
+	timeforbotjustification = 10.0
 
 func start_trial():
 	#Server.send_update_question(querydict[trialnumber])
@@ -51,6 +58,7 @@ func start_trial():
 	rt = querydict[trialnumber].rt
 	coord_1 = 1380 + querydict[trialnumber].coord1 * 4
 	coord_2 = 540 + querydict[trialnumber].coord2 * 4
+	botText = querydict[trialnumber].justification
 	spawn_others(rt*timeformovement)
 
 func toggle_question_visibility(boolean):
@@ -71,7 +79,7 @@ func _on_timetospawn_timeout():
 	bot1 = player.instance()
 	add_child(bot1)
 	bot1.update_coordinate(coord_1, coord_2)
-	bot1.set_color([255,0,0,1])
+	bot1.set_color(rand_color)
 	
 func start_timer(trial_duration):
 	$Timer.start(trial_duration)
@@ -81,24 +89,25 @@ func _on_Timer_timeout():
 	print("times up")
 	$Timer.stop()
 	if $Timer.id == "justification":
-		trialnumber = trialnumber + 1
-		start_trial()
-		#remove_child(spawner)
-		justificationtext = $Justification.text
-		
-	elif $Timer.id == "start_trial":
-		trialnumber = trialnumber + 1
-		start_trial()
 		remove_child(bot1)
-		#justification()
-
+		botjustification()
+		## TODO Global.sendtoserver(justificationtext, Global.PlayerName)
+	elif $Timer.id == "start_trial":
+		justification()
+		toggle_question_visibility(false)
+	elif $Timer.id == "botjustification":
+		$BotJustifications.visible = false
+		trialnumber = trialnumber + 1
+		start_trial()
+	
 func justification():
-	$Justification.visible = true
-	$Justification_text.visible = true
-	$Justification.text = ""
 	$Timer.id = "justification"
 	start_timer(timeforjustification)
 	
+func botjustification():
+
+	$Timer.id = "botjustification"
+	start_timer(timeforbotjustification)
 	
 func reset_position():
 	$Player.global_position = centre

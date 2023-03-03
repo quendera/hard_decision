@@ -133,8 +133,9 @@ func justification():
 func botjustification():
 	$Justification.visible = false
 	$Justification_text.visible = false
-	
-	$BotJustifications.visible = true
+	if Server.show_botjustification:
+		$BotJustifications.visible = true
+
 	$Timer.id = "botjustification"
 	send_player_justification()
 	start_timer(timeforbotjustification)

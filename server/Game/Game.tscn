@@ -94,4 +94,12 @@ text = "Disagree"
 [node name="Timer" type="Timer" parent="."]
 script = ExtResource( 4 )
 
+[node name="BotJustification" type="RichTextLabel" parent="."]
+margin_left = 50.0
+margin_top = 383.0
+margin_right = 750.0
+margin_bottom = 688.0
+custom_fonts/normal_font = ExtResource( 5 )
+text = "Do not share your screen  with others :)"
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
