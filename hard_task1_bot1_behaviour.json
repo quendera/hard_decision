@@ -1,0 +1,55 @@
+{
+    "ID": 1,
+    "pairs": 1,
+    "prompt1": "It is better to be loved than to be feared ",
+    "prompt2": "It is better to be honest than kind",
+    "coord1": -46,
+    "coord2": -89,
+    "justification": "I disagree with both statements. Being kind is important because it shows you are a good person. Being feared can lead to bad results, while being loved can bring joy. Honesty is important, but so is being kind.",
+    "timeonset": 0.7
+},{
+    "ID": 1,
+    "pairs": 2,
+    "prompt1": "Schools should have mandatory drug testing for students ",
+    "prompt2": "College education should be free",
+    "coord1": 52,
+    "coord2": 30,
+    "justification": "I agree with drug testing in schools, but not with free college. Drug testing can keep kids safe and help them stay away from drugs. College costs money and people should work hard to pay for it.",
+    "timeonset": 0.82
+},{
+    "ID": 1,
+    "pairs": 3,
+    "prompt1": "It is acceptable to lie to protect the feelings of somebody else",
+    "prompt2": "It is acceptable to lie to protect your own interests ",
+    "coord1": -1,
+    "coord2": -92,
+    "justification": "I disagree with both statements. Lying can be harmful and lead to mistrust. It's better to be honest and kind, even if it is difficult. Honesty is always the best policy.",
+    "timeonset": 0.81
+},{
+    "ID": 1,
+    "pairs": 4,
+    "prompt1": " It is justifiable to use violence to promote political change",
+    "prompt2": "Voting should be mandatory ",
+    "coord1": -94,
+    "coord2": -91,
+    "justification": "I strongly disagree with both statements. Violence is never the answer. Voting is a right and people should choose to do it, not be forced to. Respectful dialogue and peaceful protest are the best ways to promote change.",
+    "timeonset": 0.5
+},{
+    "ID": 1,
+    "pairs": 5,
+    "prompt1": "Drinking age should be lowered",
+    "prompt2": "Government should regulate social media to prevent fake news and hate speech",
+    "coord1": 13,
+    "coord2": -71,
+    "justification": "I agree with lowering the drinking age, but disagree with regulating social media. Lowering the drinking age can help reduce underage drinking. Regulating social media can limit freedom of speech and block important information.",
+    "timeonset": 0.2
+},{
+    "ID": 1,
+    "pairs": 6,
+    "prompt1": " The government should provide basic income to all citizens",
+    "prompt2": "The minimum wage should be increased",
+    "coord1": 22,
+    "coord2": -55,
+    "justification": "I agree with basic income, but disagree with raising the minimum wage. Basic income can help provide people with financial security. Raising the minimum wage can lead to job losses and higher prices.",
+    "timeonset": 0.67
+}

@@ -19,6 +19,7 @@ var querydict = []
 var scene = preload("res://Scenes/Player.tscn")
 var others = preload("res://Scenes/Others.tscn")
 var trialnumber
+var spawner
 
 # Called when the node enters the scene tree for the first time.
 
@@ -26,6 +27,7 @@ func _ready():
 	print(Global.PlayerName)
 	centre = Global.get_viewport_rect().size/2
 	querydict = read_json_file("res://csvjson.json")
+	print(querydict)
 	trialnumber = 0
 	set_trialdurations()
 	align_stuff()
@@ -58,6 +60,8 @@ func start_trial():
 	$Player.can_move = true
 	$Timer.id = "start_trial"
 	start_timer(timeformovement) 
+	botscoordinates = Vector2(300,300)
+	spawn_others(querydict[trialnumber].timeonset*timeformovement,botscoordinates)
 
 func spawn_others(spawn_time, botscoordinates):
 	var timetospawn = Timer.new()
@@ -68,7 +72,7 @@ func spawn_others(spawn_time, botscoordinates):
 	timetospawn.connect("timeout", self, "_on_timetospawn_timeout")
 	
 func _on_timetospawn_timeout():
-	var spawner = others.instance()
+	spawner = others.instance()
 	add_child(spawner)
 	spawner.set_positions(botscoordinates)
 	
@@ -87,6 +91,7 @@ func _on_Timer_timeout():
 	if $Timer.id == "justification":
 		trialnumber = trialnumber + 1
 		start_trial()
+		remove_child(spawner)
 		justificationtext = $Justification.text
 		Global.sendtoserver(justificationtext, Global.PlayerName)
 		
