@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Server.gd" type="Script" id=1]
 [ext_resource path="res://TiltNeon-Regular-VariableFont_XROT,YROT.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://frame.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 45
@@ -72,6 +73,24 @@ margin_right = 1899.0
 margin_bottom = 1060.0
 custom_fonts/font = SubResource( 3 )
 text = "0 Players connected"
+
+[node name="join" type="Label" parent="Control"]
+margin_left = 77.0
+margin_top = 443.0
+margin_right = 919.0
+margin_bottom = 671.0
+custom_fonts/font = SubResource( 3 )
+text = "Join here:
+
+
+
+
+http://192.168.1.101"
+
+[node name="Frame" type="Sprite" parent="Control"]
+position = Vector2( 283, 756 )
+scale = Vector2( 1.4, 1.4 )
+texture = ExtResource( 3 )
 
 [connection signal="timeout" from="tick_rate" to="." method="_on_tick_rate_timeout"]
 [connection signal="pressed" from="Control/CenterContainer/startgame" to="." method="_on_startgame_pressed"]
