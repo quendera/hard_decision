@@ -30,15 +30,15 @@ func _ready():
 	print(Global.PlayerName)
 	#centre = Global.get_viewport_rect().size/2
 	centre = Vector2(1380, 540)
-	querydict = read_json_file("res://csvjson.json")
+	#querydict = read_json_file("res://csvjson.json")
 	trialnumber = 0
 	set_trialdurations()
 	# align_stuff()
 	start_trial()
 
 func set_trialdurations():
-	timeforjustification = 5.0
-	timeformovement = 5.0
+	timeforjustification = 100.0
+	timeformovement = 100.0
 	
 func read_json_file(file_path):
 	var file = File.new()
@@ -53,6 +53,8 @@ func read_json_file(file_path):
 
 func start_trial():
 	reset_position()
+	querydict = Server.querydict
+	print(querydict[0])
 	q1 = querydict[trialnumber].question1.split("or")
 	q2 = querydict[trialnumber].question2.split("or")
 	q1_top = "[center]"+q1[0]+"[/center]"

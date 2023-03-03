@@ -27,12 +27,9 @@ func _input(event):
 func _process(_delta):
 	pass
 	
-func _on_tick_rate_timeout():
-	send_player_state()
 
 func send_player_state():
 	var player_state = {
-		"T": Server.client_clock, # OS.get_system_time_msecs(),
 		"P": get_global_position(),
 	}
 	Server.send_player_state(player_state)

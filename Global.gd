@@ -7,6 +7,7 @@ extends Node2D
 
 var window_size = get_viewport()
 var PlayerName = "test"
+var querydict = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,6 +15,7 @@ func _ready():
 	
 func sendtoserver(dataentry, playerid):
 	pass
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
