@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hard_decision_server_2.png-6a8ce4a31e2c28fa3bfc8fc3b927e92e.stex"
+path="res://.import/hard_decision_server_2.png-10690528bbe82b8ac46abb87907f0cc0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hard_decision_server_2.png"
-dest_files=[ "res://.import/hard_decision_server_2.png-6a8ce4a31e2c28fa3bfc8fc3b927e92e.stex" ]
+source_file="res://server/hard_decision_server_2.png"
+dest_files=[ "res://.import/hard_decision_server_2.png-10690528bbe82b8ac46abb87907f0cc0.stex" ]
 
 [params]
 
