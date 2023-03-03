@@ -11,3 +11,7 @@ func _process(_delta):
 	
 func update_coordinate(x,y):
 	self.global_position = Vector2(x,y)
+	
+func set_color(color):
+	print($Polygon2D.color)
+	$Polygon2D.color = color

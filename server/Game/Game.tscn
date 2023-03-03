@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Gameplay.gd" type="Script" id=1]
 [ext_resource path="res://TiltNeon-Regular-VariableFont_XROT,YROT.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Game/Text.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Timer.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -71,3 +72,8 @@ rect_rotation = -90.0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 text = ""
+
+[node name="Timer" type="Timer" parent="."]
+script = ExtResource( 4 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

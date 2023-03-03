@@ -3,6 +3,8 @@ extends Node
 var player_list = {} 
 var player_states = {}
 var world_state = {}
+var querydict = []
+var playerColor = [[1,0,0,1]]
 
 var game = preload("res://Game/Game.tscn")
 var player = preload("res://Game/player.tscn")
@@ -68,18 +70,14 @@ remote func receive_player_state(player_state):
 		add_child(world_state[player_id])
 	var coordinates = player_states[player_id]['P']
 	world_state[player_id].update_coordinate(coordinates[0],coordinates[1])
+	print(player_list[player_id]["join_order"])
+	#world_state[player_id].set_color(playerColor[player_list[player_id]["join_order"]])
 
 
 func _on_tick_rate_timeout():
-	# Broadcast world state every time the timer times out (every 0.05s. That's 20fps).
-	#world_state["player_states"] = player_states.duplicate(true) # Deep copy
-	#rpc_unreliable_id(0, "receive_world_state", world_state)
-	print(player_states)
-	#for player_id in player_list.keys(): 
 	pass
 
 func _on_startgame_pressed():
-	var querydict = []
 	querydict = read_json_file("res://csvjson.json")
 	print("Start clicked")
 	for player_id in player_list.keys(): 
