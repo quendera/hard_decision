@@ -90,6 +90,10 @@ func send_player_state(player_state):
 	print("Sending states")
 	rpc_unreliable_id(1, "receive_player_state", player_state)
 
+func send_player_justification(player_justification):
+	print("Sending states")
+	rpc_unreliable_id(1, "receive_player_justication", player_justification)
+
 remote func receive_world_state(world_state):
 	var world = get_node_or_null("/root/World")
 	if not world: return

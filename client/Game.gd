@@ -135,8 +135,16 @@ func botjustification():
 	$Justification_text.visible = false
 	if Server.show_botjustification:
 		$BotJustifications.visible = true
+
 	$Timer.id = "botjustification"
+	send_player_justification()
 	start_timer(timeforbotjustification)
 
 func reset_position():
 	$Player.global_position = centre
+
+func send_player_justification():
+	var player_justification = {
+		"J": $Justification.text,
+	}
+	Server.send_player_justification(player_justification)
