@@ -65,8 +65,8 @@ func start_trial():
 	# Prepare the trial
 	reset_position()
 	querydict = Server.querydict
-	q1 = "[color=blue]Question 1: [/color]" + querydict[trialnumber].question1
-	q2 = "[color=red]Question 2: [/color]" + querydict[trialnumber].question2
+	q1 = "[color=blue]Question 1: [/color]" + querydict[trialnumber].prompt1
+	q2 = "[color=red]Question 2: [/color]" + querydict[trialnumber].prompt2
 	$Q1.set_bbcode(q1)
 	$Q2.set_bbcode(q2)
 	toggle_question_visibility(true)

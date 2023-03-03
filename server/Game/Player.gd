@@ -14,4 +14,5 @@ func update_coordinate(x,y):
 	
 func set_color(color):
 	print($Polygon2D.color)
-	$Polygon2D.color = color
+	#print(color)
+	$Polygon2D.color = Color(float(color[0])/255,float(color[1])/255,float(color[2])/255,1)

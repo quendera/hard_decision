@@ -4,15 +4,19 @@ var player_list = {}
 var player_states = {}
 var world_state = {}
 var querydict = []
-var playerColor = [[1,0,0,1]]
+var playerColor = [[255,127,15,255], [43,160,43,255], [148,103,189,255], [140,86,76,255]]
+#var playerColor = ["crimson"]
 
+
+#rgba(214,39,39,255)
+#rgba(31,119,180,255)
 var game = preload("res://Game/Game.tscn")
 var player = preload("res://Game/Player.tscn")
 
 var PROD = OS.get_environment("PROD") or Array(OS.get_cmdline_args()).has("-prod")
 var server = WebSocketServer.new() # NetworkedMultiplayerENet.new()
 const PORT = 7070
-const MAX_PLAYERS = 20
+const MAX_PLAYERS = 4
 
 func _ready():
 	start_server()
@@ -69,16 +73,17 @@ remote func receive_player_state(player_state):
 		world_state[player_id] = newplayer
 		add_child(world_state[player_id])
 	var coordinates = player_states[player_id]['P']
-	world_state[player_id].update_coordinate(coordinates[0],coordinates[1])
+	var dx = coordinates[0] - 540
+	var dy = coordinates[1] - 1380
+	world_state[player_id].update_coordinate(1380 + dx, 540+dy)
 	print(player_list[player_id]["join_order"])
-	#world_state[player_id].set_color(playerColor[player_list[player_id]["join_order"]])
-
+	world_state[player_id].set_color(playerColor[player_list[player_id]["join_order"]])
 
 func _on_tick_rate_timeout():
 	pass
 
 func _on_startgame_pressed():
-	querydict = read_json_file("res://csvjson.json")
+	querydict = read_json_file("res://hard_task1_bot1_behaviour.json")
 	print("Start clicked")
 	for player_id in player_list.keys(): 
 		print(player_id)
@@ -87,7 +92,6 @@ func _on_startgame_pressed():
 	$Control.visible = false
 	var instance = game.instance()
 	add_child(instance)
-	
 
 func read_json_file(file_path):
 	var file = File.new()

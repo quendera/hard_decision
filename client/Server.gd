@@ -15,8 +15,9 @@ var DEV = OS.get_environment("DEV") or Array(OS.get_cmdline_args()).has("-dev") 
 # to display it above their healthbar
 var player_list = [] 
 #var url = "http://95.179.179.188/hard_decision/server/hard_decision_server_2.html"
-var url = "ws://127.0.0.1:7070" #Local
-#var url = "ws://192.168.1.102:7070" #LAN
+var url = "ws://127.0.0.1:7070"
+#var url = "ws://192.168.1.102:7070"
+
 
 func _ready():
 	pass
