@@ -7,7 +7,7 @@ var querydict = []
 var playerColor = [[1,0,0,1]]
 
 var game = preload("res://Game/Game.tscn")
-var player = preload("res://Game/player.tscn")
+var player = preload("res://Game/Player.tscn")
 
 var PROD = OS.get_environment("PROD") or Array(OS.get_cmdline_args()).has("-prod")
 var server = WebSocketServer.new() # NetworkedMultiplayerENet.new()
