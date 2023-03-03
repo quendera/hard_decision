@@ -14,6 +14,7 @@ var DEV = OS.get_environment("DEV") or Array(OS.get_cmdline_args()).has("-dev") 
 # save it in a global variable so that Enemy could take a name from this list
 # to display it above their healthbar
 var player_list = [] 
+var url = "http://95.179.179.188/hard_decision/server/hard_decision_server_2.html"
 
 func _ready():
 	pass
@@ -25,7 +26,9 @@ func connect_to_server():
 	client = WebSocketClient.new()
 	
 	# Connect to server, use WSS
-	var url = "ws://127.0.0.1:7070"
+	#var url = "http://95.179.179.188/hard_decision/server/hard_decision_server_2.html"
+	#var url = "ws://127.0.0.1:7070"
+	#var url = "ws://169.254.184.206:7070"
 	# Connect without WSS
 	# url = "ws://178.62.117.12:6969"
 
