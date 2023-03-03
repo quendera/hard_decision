@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -6,87 +6,99 @@
 [ext_resource path="res://TiltNeon-Regular-VariableFont_XROT,YROT.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Timer.gd" type="Script" id=6]
+[ext_resource path="res://fontforquest.tres" type="DynamicFont" id=7]
 
 [sub_resource type="DynamicFont" id=1]
-size = 36
+size = 48
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 36
 font_data = ExtResource( 4 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 444, 444 )
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 940.0
-margin_top = 100.0
-margin_right = 1820.0
-margin_bottom = 980.0
+margin_left = 100.0
+margin_top = 940.0
+margin_right = 980.0
+margin_bottom = 1820.0
 grow_horizontal = 0
 grow_vertical = 0
 color = Color( 0.588235, 0.588235, 0.588235, 1 )
 
-[node name="LineV" type="Line2D" parent="ColorRect"]
-position = Vector2( 1236, -240.886 )
-scale = Vector2( 0.990052, 0.941952 )
-points = PoolVector2Array( -808.038, 1189.52, -808.038, 254.669 )
-default_color = Color( 0.392157, 0.764706, 1, 1 )
+[node name="BlueLine" type="ColorRect" parent="ColorRect"]
+margin_left = 880.0
+margin_top = 430.0
+margin_right = 900.0
+margin_bottom = 1310.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_rotation = 90.0
+color = Color( 0.360784, 0.619608, 0.85098, 0.784314 )
 
-[node name="LineH" type="Line2D" parent="ColorRect"]
-position = Vector2( 1844, -28 )
-points = PoolVector2Array( -960, 464, -1848, 464 )
-default_color = Color( 0.392157, 0.764706, 1, 1 )
+[node name="RedLine" type="ColorRect" parent="ColorRect"]
+margin_left = 430.0
+margin_right = 450.0
+margin_bottom = 880.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color( 0.85098, 0.360784, 0.360784, 0.784314 )
 
-[node name="Q1_top" parent="." instance=ExtResource( 3 )]
-margin_left = 890.0
-margin_top = 0.0
-margin_right = 1870.0
-margin_bottom = 100.0
+[node name="Top" parent="." instance=ExtResource( 3 )]
+margin_left = 448.0
+margin_top = 848.0
+margin_right = 648.0
+margin_bottom = 948.0
 bbcode_enabled = true
 meta_underlined = false
-text = ""
+text = "Agree"
 scroll_active = false
 
-[node name="Q1_bot" parent="." instance=ExtResource( 3 )]
-margin_left = 890.0
-margin_top = 980.0
-margin_right = 1870.0
-margin_bottom = 1080.0
+[node name="Bottom" parent="." instance=ExtResource( 3 )]
+margin_left = 416.0
+margin_top = 1828.0
+margin_right = 720.0
+margin_bottom = 1928.0
 bbcode_enabled = true
 meta_underlined = false
-text = ""
+text = "Disagree"
 scroll_active = false
 
-[node name="Q2_right" parent="." instance=ExtResource( 3 )]
-margin_left = 1920.0
-margin_top = 50.0
-margin_right = 2900.0
-margin_bottom = 150.0
+[node name="Right" parent="." instance=ExtResource( 3 )]
+margin_left = 1088.0
+margin_top = 1290.0
+margin_right = 1301.0
+margin_bottom = 1390.0
 rect_rotation = 90.0
 bbcode_enabled = true
-text = ""
+text = "Agree"
 
-[node name="Q2_left" parent="." instance=ExtResource( 3 )]
-margin_left = 840.0
-margin_top = 1030.0
-margin_right = 1820.0
-margin_bottom = 1130.0
+[node name="Left" parent="." instance=ExtResource( 3 )]
+margin_left = 8.0
+margin_top = 1528.0
+margin_right = 296.0
+margin_bottom = 1628.0
 rect_rotation = -90.0
 bbcode_enabled = true
-text = ""
+text = "Disagree"
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1380, 540 )
+position = Vector2( 544, 1376 )
+z_as_relative = false
 
 [node name="Timer" type="Timer" parent="."]
 script = ExtResource( 6 )
 
 [node name="TextureProgress" type="TextureProgress" parent="Timer"]
-margin_left = 50.0
-margin_top = 516.0
-margin_right = 114.0
-margin_bottom = 580.0
+margin_left = 848.0
+margin_top = 776.0
+margin_right = 912.0
+margin_bottom = 840.0
 rect_scale = Vector2( 2, 2 )
 texture_under = ExtResource( 1 )
 texture_progress = ExtResource( 1 )
@@ -94,18 +106,64 @@ fill_mode = 4
 tint_under = Color( 0, 0, 0, 1 )
 
 [node name="Justification_text" type="RichTextLabel" parent="."]
-margin_left = 50.0
-margin_top = 700.0
-margin_right = 750.0
-margin_bottom = 780.0
+margin_left = 96.0
+margin_top = 40.0
+margin_right = 1064.0
+margin_bottom = 120.0
 custom_fonts/normal_font = SubResource( 1 )
 text = "Enter your justification in the box below:"
 
 [node name="Justification" type="TextEdit" parent="."]
-margin_left = 50.0
-margin_top = 780.0
-margin_right = 850.0
-margin_bottom = 980.0
+
+margin_left = 100.0
+margin_top = 116.0
+margin_right = 980.0
+margin_bottom = 716.0
+
 custom_fonts/font = SubResource( 2 )
+wrap_enabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+position = Vector2( 540, 1380 )
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource( 3 )
+
+[node name="Q1" type="RichTextLabel" parent="."]
+margin_left = 100.0
+margin_top = 116.0
+margin_right = 980.0
+margin_bottom = 416.0
+focus_mode = 2
+custom_colors/selection_color = Color( 0.533333, 0.345098, 0.345098, 1 )
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "Hello"
+text = "Hello"
+selection_enabled = true
+
+[node name="Q2" type="RichTextLabel" parent="."]
+margin_left = 100.0
+margin_top = 420.0
+margin_right = 980.0
+margin_bottom = 720.0
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "Hello"
+text = "Hello"
+
+[node name="BotJustifications" type="RichTextLabel" parent="."]
+margin_left = 104.0
+margin_top = 672.0
+margin_right = 984.0
+margin_bottom = 832.0
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "This is the bot justification."
+text = "This is the bot justification."
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
